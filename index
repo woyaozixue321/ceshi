@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<meta http-equiv="Cache-Control" content="no-siteapp"/>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<meta http-equiv="Cache-Control" content="no-siteapp"/>
+		
+	<title></title>
+         
+		<link rel="icon" href="favicon.png" type="image/png"/>
+		<link rel="stylesheet" href="layui.css">
+		<link rel="stylesheet" type="text/css" href="font-awesome.css"/>
+		
+		
+
+		<style type="text/css">
+			html,body{
+				width: 100%;
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+			}
+			.k-lists-body{
+				padding: 10px;
+			}
+			a:link{
+				text-decoration: none !important;
+			}
+			a:visited{
+				text-decoration: none !important;
+			}
+			a:hover{
+				text-decoration: none !important;
+			}
+			a:active{
+				text-decoration: none !important;
+			}
+			.lianjie {
+				color: #1E9FFF;
+			}
+			.lianjie:hover {
+				color: #009688;
+			}
+		</style>
+		<style type="text/css">
+			.layui-elem-field{
+				margin:0px;
+				margin-bottom: 10px;
+			}
+			.layui-form-item,.layui-table-view{
+				margin-bottom: 0px;
+			}
+			.layui-form-item .layui-inline {
+				margin-bottom: 0px;
+			}
+			.more-search{
+				position: absolute;
+				z-index: 1;
+				display: none;
+				border: 1px solid #d2d2d2;
+				background-color: #fff;
+				border-radius: 2px;
+				box-shadow: 0 2px 4px rgba(0,0,0,.12);
+				box-sizing: border-box;
+				padding: 15px;
+			}
+			.more-search-btn{
+				cursor: pointer;
+				cursor: hand;
+			}
+		</style>
+		
+	<style type="text/css">
+		a.layui-btn{
+			margin-left: 10px;
+		}
+		#greetings{
+			position: absolute;
+			height: auto;
+			border-left: 1px solid rgba(0, 0, 0, 0.11);
+			border-right: 1px solid rgba(0, 0, 0, 0.11);
+			left: 0px;
+			z-index:5555;
+		}
+		#greetings ul{
+			list-style: none;
+			box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.44);
+			-webkit-margin-before: 0em;
+			-webkit-margin-after: 0em;
+			-webkit-margin-start: 0px;
+			-webkit-margin-end: 0px;
+			-webkit-padding-start: 0px;
+		}
+		#greetings li{
+			text-align: left;
+			padding: 5px;
+			font-family: inherit;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+			height: 25px;
+			width: 180px;
+			line-height: 25px;
+			background-color: rgba(255, 255, 255, 0.8);
+			cursor: pointer;
+		}
+		#greetings li:hover{
+			background-color: rgba(175, 42, 0, 0.52);
+			color: white;
+		}
+		.lscxan:hover{
+			border: 1px solid #03bce0e3 !important;
+            border-radius: 0;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(0,150,136,0.6);		}
+		.layui-btn-tijiao {
+			background-color: #03bce0e3 !important;
+		}
+		.layui-elem-quote {
+                border-left: 5px solid #03bce0e3 !important;
+            }
+            .layui-laypage .layui-laypage-curr .layui-laypage-em {
+                background-color: #404242e3 !important;
+            }
+            .layui-btn-primary:hover,.layui-laypage button:hover {
+                border-color: #03bce0e3 !important;
+                box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(0,150,136,0.6);
+            }
+            .layui-laypage a:hover {
+                color: #3c3e3ee6 !important;
+            }	</style>
+
+	<meta name="__hash__" content="c75d24f3ad44dc3b87ef068894c81603_50b114a4ff9aaac45db6faa0d535a9c6" /></head>
+	<body>
+		<?php include "hmcjs.php";?>
+		<div class="k-lists-body">
+			
+	<form class="layui-form">
+		<blockquote class="layui-elem-quote">
+			<!-- 排序所需要的两个字段 开始 -->
+			<input type="hidden" name="lx">
+			<input type="hidden" name="bm">
+			<!-- 排序所需要的两个字段 结束 -->
+			<div class="layui-form-item">
+				
+			<div class="layui-inline">
+    <a class="layui-btn layui-btn-tijiao" href="javascript:;" id="addBtn">添加员工</a>
+</div>
+<script src="https://cdn.staticfile.org/layui/2.5.6/layui.all.js"></script>
+<script>
+     layui.use(['layer', 'form'], function(){
+        var layer = layui.layer,
+        form = layui.form;
+
+        var addBtn = document.querySelector('.layui-btn-tijiao');
+        addBtn.addEventListener('click', function() {
+            layer.open({
+                type: 1,
+                title: '添加员工',
+                area: ['800px', '400px'],
+                content: `
+                  <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                      <div class="layui-inline">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-inline">
+                          <input type="text" name="name" lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+					  <div class="layui-inline">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-inline">
+                          <input type="text" name="sex" lay-verify="required" placeholder="请输入性别" autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+					  <div class="layui-inline">
+                        <label class="layui-form-label">员工编号</label>
+                        <div class="layui-input-inline">
+                          <input type="text" name="bh" lay-verify="required" placeholder="请输入员工编号" autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+                      <div class="layui-inline">
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-inline">
+                          <input type="text" name="phone" lay-verify="required|phone" placeholder="请输入员工电话" autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+					 
+					  <div class="layui-inline">
+                        <label class="layui-form-label">入职时间</label>
+                        <div class="layui-input-inline">
+                          <input type="text" name="rzsj" lay-verify="required"  autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+					  <div class="layui-inline">
+                        <label class="layui-form-label">转正时间</label>
+                        <div class="layui-input-inline">
+                          <input type="text" name="zzsj" lay-verify="required"  autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+					  <div class="layui-inline">
+                        <label class="layui-form-label">部门</label>
+                        <div class="layui-input-inline">
+                          <input type="text" name="bm" lay-verify="required" placeholder="请输入所属部门" autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+					  <div class="layui-inline">
+                        <label class="layui-form-label">岗位</label>
+                        <div class="layui-input-inline">
+                          <input type="text" name="job" lay-verify="required" placeholder="请输入岗位" autocomplete="off" class="layui-input">
+                        </div>
+                      </div>
+                    </div>
+                  </form>`,
+                btn: ['提交', '取消'],
+				btn1: function(index, layero){
+  var formData = new FormData(layero.find('form')[0]);
+  $.ajax({
+    type: "POST",
+    url: "ryjs.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      if (data === 'success') {
+        layer.close(index);
+        layer.msg('添加员工成功');
+      } else {
+        layer.msg('添加员工失败');
+      }
+    },
+    error: function () {
+      layer.msg('添加员工失败');
+    }
+  });
+},
+                btn2: function(index, layero){
+                  layer.close(index);
+                }
+            });
+        });
+    });
+</script>
+
+
+					<div class="layui-inline">
+						<a class="layui-btn layui-btn-tijiao" href="javascript:;" onclick="k_open_leyer('转正审核','/rbac/mac.html','1200')">
+							转正审核
+						</a>
+					</div>				<div class="layui-inline" style="width: 120px;">
+					<select name="zt">
+					    <option value="全部">全部</option>
+						<option value="试用期">试用期</option>
+						<option value="已转正">已转正</option>						
+						<option value="已离职">已离职</option>
+					</select>
+				</div>
+				<div class="layui-inline" style="width: 180px;">
+					<select name="bm">
+						<option value="">用户部门</option>
+						<option value="总经办">总经办</option><option value="综合部">综合部</option><option value="生产部">生产部</option><option value="模具科">模具科</option><option value="设备科">设备科</option><option value="工艺科">工艺科</option><option value="质量部">质量部</option><option value="巡检科">巡检科</option><option value=" 外检科"> 外检科</option><option value=" 安环部"> 安环部</option><option value=" 采购部"> 采购部</option><option value=" 财务部"> 财务部</option><option value=" 项目部"> 项目部</option><option value=" 设计部"> 设计部</option><option value=" 仓储部"> 仓储部</option><option value=" 电驱电控事业部"> 电驱电控事业部</option>
+						</select>
+				</div>
+				<div class="layui-inline">
+					<div class="layui-input-inline" style="width: 210px;">
+						<input type="text" name="sousuo" list="greetings" autocomplete="off" placeholder="请输入员工姓名、编号、电话" class="layui-input" id="sousuo" value="">
+						<div id="greetings" >
+							<ul id="tcontent"></ul>
+						</div>
+					</div>
+				</div>
+				<button class="layui-btn k-search layui-btn-primary lscxan" lay-submit="" lay-filter="search" type="submit" id="submit_one">
+					搜索
+				</button>
+				<button class="lscxan" style="display: none;" lay-submit="" lay-filter="search_hidden" type="button" id="submit_two">
+					搜索
+				</button>
+				<button class="layui-btn layui-btn-primary lscxan" type="reset">
+					重置
+				</button>
+				<a class="layui-btn pull-right layui-btn-primary lscxan" href="javascript:;" onClick="parent.removeIframe()" style="text-decoration:none">
+					关闭
+				</a>
+				<a class="layui-btn pull-right layui-btn-primary lscxan" href="javascript:location.replace(location.href);" title="刷新" style="text-decoration:none">
+					刷新
+				</a>
+			</div>
+		</blockquote>
+		<div class="more-search">
+			<div class="layui-form-item"></div>
+		</div>
+	<input type="hidden" name="__hash__" value="c75d24f3ad44dc3b87ef068894c81603_50b114a4ff9aaac45db6faa0d535a9c6" /></form>
+<script>
+	var mydata=[<?php echo $data ;?>];
+	</script>
+<script type="text/html" id="btn">
+
+		<a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="edit">更新</a>
+		<a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="del">删除</a>
+	
+</script>
+	<table id="table" lay-filter="table" class="layui-table" lay-data="{weight:200,height:'full-100', data:mydata,limit:30,limits:[30,60,90],page:true, id:'table',request: {pageName: 'p'}}" >
+		<thead>
+			<tr>
+				<th lay-data="{field:'id',type:'id',align: 'center'}">占位</th>
+				<th lay-data="{field:'id',type:'id',align: 'center'}">序号</th>
+				<th lay-data="{field:'name',fixed: 'left',align: 'center'}">员工姓名</th>
+				
+				<th lay-data="{field:'phone',align: 'center',sort: 'true'}">手机号码</th>
+				<th lay-data="{field:'bh',align: 'center'}">员工编号</th>
+				<th lay-data="{field:'sex',align: 'center',sort: 'true'}">员工性别</th>
+				<th lay-data="{field:'rzsj',align: 'center',sort: 'true'}">入职时间</th>
+				<th lay-data="{field:'zzsj',align: 'center'}">转正时间</th>
+				<th lay-data="{field:'zt',align: 'center',sort: 'true'}">状态</th>
+				<th lay-data="{field:'bm',align: 'center'}">所属部门</th>
+				<th lay-data="{field:'job',align: 'center'}">岗位</th>
+				<th lay-data="{field:'',align: 'center',width: 300,templet: '#btn',unresize: true}">操作</th>
+				
+			</tr>
+		</thead>
+	</table>
+	<input type="hidden" id="zifujiyemian">
+
+		</div>
+		
+		<script src="https://cdn.staticfile.org/layui/2.5.6/layui.all.js"></script>
+		<script src="public.js"></script>
+		<script type="text/javascript">
+			$(document).bind("contextmenu",function(e){
+				return false;
+			});
+			var element = layui.element
+			,layer = layui.layer
+			,table = layui.table
+			,form = layui.form
+			,$ = layui.jquery;
+			$(document).ready(function(){
+				form.on('submit(search)', function(data){
+					var obj_field = $("input[name=lx]").val();
+					var obj_type = $("input[name=bm]").val();
+					var sort = {field:obj_field,type:obj_type};
+					var where = data.field;
+					$("form input[type=checkbox]").each(function(){
+						var key = $(this).attr('name');
+						if (!where[key]) where[key] = 0;
+					});
+					table.reload('table',{
+						initSort: sort
+						,where: where
+						,page: {
+							curr: 1 //重新从第 1 页开始
+						}
+					});
+					return false;
+				});
+				form.on('submit(search_hidden)', function(data){
+					var obj_field = $("input[name=lx]").val();
+					var obj_type = $("input[name=bm]").val();
+					var sort = {field:obj_field,type:obj_type};
+					var where = data.field;
+					$("form input[type=checkbox]").each(function(){
+						var key = $(this).attr('name');
+						if (!where[key]) where[key] = 0;
+					});
+					table.reload('table',{
+						initSort: sort
+						,where: where
+					});
+					return false;
+				});
+				table.on('sort(table)', function(obj){
+					//注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+					console.log(obj.field); //当前排序的字段名
+					console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+					console.log(this); //当前排序的 th 对象
+					$("input[name=lx]").val(obj.field);
+					$("input[name=bm]").val(obj.type);
+					$("#submit_one").click();
+				});
+				$('.more-search-btn').click(function(e) {
+					var is_more_open = $('.more-search').css('display');
+					if (is_more_open == 'none') {
+						$('.more-search').show();
+						$('.more-search-btn i').removeClass("fa-chevron-circle-down").addClass("fa-chevron-circle-up");
+					}else{
+						$('.more-search').hide();
+						$('.more-search-btn i').removeClass("fa-chevron-circle-up").addClass("fa-chevron-circle-down");
+					}
+					e.stopPropagation();
+				})
+				$(document).click(function(){
+					$('.more-search').hide();
+					$('.more-search-btn i').removeClass("fa-chevron-circle-up").addClass("fa-chevron-circle-down");
+				}) 
+				$('.more-search').click(function(e){
+					e.stopPropagation();
+				})
+				$('.batch_btn').click(function(){
+					var url = $(this).data('url');
+					batch(url);
+				})
+			})
+			function batch_data(){
+				var checkStatus = table.checkStatus('table')
+				,data = checkStatus.data;
+				var arr = new Array();
+				$.each(data,function(index,value){
+					arr.push(value['id']);
+				});
+				console.log(arr);
+				var str = arr.join(',');
+				return str;
+			}
+			function batch(url){
+				var ids = batch_data();
+				if (!ids) {
+					layer.msg("未选择数据！",{anim: 6});//错误提示
+					return;
+				}
+				var obj = $(this);
+				k_submit_start(obj);//开启 按钮锁定 和 loading 显示
+				$.ajax({
+					url:url,
+					type:"post",
+					data:{id:ids},
+					dataType:"json",
+					success:function(r){
+						k_submit_end(obj);//取消按钮锁定 和 loading 显示
+						if (r.status==1) {
+							layer.msg(r.info);//父级页面提示成功信息
+							$("#submit_two").click();//刷新这页数据
+						}else{
+							layer.msg(r.info,{anim: 6});//错误提示
+						}
+					},
+					error:function(){
+						k_submit_end(obj);//取消 按钮锁定 和 loading 显示
+						layer.msg('网络错误！',{anim: 6});//错误提示
+					}
+				});
+			}
+		</script>
+		
+	
+	<script>
+		$(document).ready(function(){
+			//监听工具条
+			table.on('tool(table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+				var data = obj.data; //获得当前行数据
+				var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+				var tr = obj.tr; //获得当前行 tr 的DOM对象
+				if(layEvent === 'del'){ //删除
+					layer.confirm('确定要删除吗？', function(index){
+						var a = $(tr).find('a[lay-event=del]');
+						k_submit_start(a); //开启 按钮锁定 和 loading 显示
+						$.ajax({
+							url:'/rbac/deluser.html',
+							type:"post",
+							data:{id:data.id},
+							dataType:"json",
+							success:function(r){
+								k_submit_end(a); //取消按钮锁定 和 loading 显示
+								if (r.status==1) {
+									layer.msg(r.info); //父级页面提示成功信息
+									obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+									layer.close(index); //关闭弹出的子页面窗口
+								}else{
+									layer.msg(r.info,{anim: 6}); //错误提示
+								}
+							},
+							error:function(){
+								k_submit_end(a); //取消 按钮锁定 和 loading 显示
+								layer.msg('该数据非常重要，限授权人员操作！',{anim: 6}); //错误提示
+							}
+						});
+					});
+				} else if(layEvent === 'yghy'){ //还原
+					layer.confirm('确定要还原吗？', function(index){
+						var a = $(tr).find('a[lay-event=yghy]');
+						k_submit_start(a); //开启 按钮锁定 和 loading 显示
+						$.ajax({
+							url:'/rbac/huifuuser.html',
+							type:"post",
+							data:{id:data.id},
+							dataType:"json",
+							success:function(r){
+								k_submit_end(a); //取消按钮锁定 和 loading 显示
+								if (r.status==1) {
+									layer.msg(r.info); //父级页面提示成功信息
+									obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+									layer.close(index); //关闭弹出的子页面窗口
+								}else{
+									layer.msg(r.info,{anim: 6}); //错误提示
+								}
+							},
+							error:function(){
+								k_submit_end(a); //取消 按钮锁定 和 loading 显示
+								layer.msg('网络错误！',{anim: 6}); //错误提示
+							}
+						});
+					});
+				} else if(layEvent === 'ygty'){ //启用
+					layer.confirm('确定要启用吗？', function(index){
+						var a = $(tr).find('a[lay-event=ygty]');
+						k_submit_start(a); //开启 按钮锁定 和 loading 显示
+						$.ajax({
+							url:'/rbac/startuser.html',
+							type:"post",
+							data:{id:data.id},
+							dataType:"json",
+							success:function(r){
+								k_submit_end(a); //取消按钮锁定 和 loading 显示
+								if (r.status==1) {
+									layer.msg(r.info); //父级页面提示成功信息
+									$('#submit_two').click(); //刷新父级页面
+									layer.close(index); //关闭弹出的子页面窗口
+								}else{
+									layer.msg(r.info,{anim: 6}); //错误提示
+								}
+							},
+							error:function(){
+								k_submit_end(a); //取消 按钮锁定 和 loading 显示
+								layer.msg('网络错误！',{anim: 6}); //错误提示
+							}
+						});
+					});
+				} else if(layEvent === 'ygqy'){ //停用
+					layer.confirm('确定要停用吗？', function(index){
+						var a = $(tr).find('a[lay-event=ygqy]');
+						k_submit_start(a); //开启 按钮锁定 和 loading 显示
+						$.ajax({
+							url:'/rbac/stopuser.html',
+							type:"post",
+							data:{id:data.id},
+							dataType:"json",
+							success:function(r){
+								k_submit_end(a); //取消按钮锁定 和 loading 显示
+								if (r.status==1) {
+									layer.msg(r.info); //父级页面提示成功信息
+									$('#submit_two').click(); //刷新父级页面
+									layer.close(index); //关闭弹出的子页面窗口
+								}else{
+									layer.msg(r.info,{anim: 6}); //错误提示
+								}
+							},
+							error:function(){
+								k_submit_end(a); //取消 按钮锁定 和 loading 显示
+								layer.msg('网络错误！',{anim: 6}); //错误提示
+							}
+						});
+					});
+				} else if(layEvent === 'edit'){
+					var id = data.id;
+					k_open_leyer('更新用户','/rbac/edituser.html?id='+id,'960','540')
+				} else if(layEvent === 'zyfy'){
+					var id = data.id;
+					k_open_leyer('1转移','/rbac/xxzhuanyi.html?id='+id+'&xxzy=1','960','540')
+				} else if(layEvent === 'zyky'){
+					var id = data.id;
+					k_open_leyer('2转移','/rbac/xxzhuanyi.html?id='+id+'&xxzy=2','960','540')
+				}
+			});
+			$("#sousuo").keyup(function(){
+				$("#greetings").show();
+				var txt=$("#sousuo").val();
+				if (txt!="") {
+					$.ajax({
+						url:'/ajax/get_rsyonghu.html',
+						type:"get",
+						data:{'txt': txt,'node': 17},
+						dataType:"json",
+						success:function(data){
+							var district = data.district;
+							$("#tcontent li").remove();
+							for(var i in district){
+								var li=$("<li></li>");
+								$(li).html(district[i]['ygmingcheng']);
+								$("#tcontent").append(li);
+							}
+						}
+					});
+				}
+			});
+			$("#tcontent").on("click","li", function() {
+				$("#greetings").show();
+				var Uarry=$("#tcontent li");
+				var count=$(this).index();//获取li的下标
+				var Tresult=Uarry.eq(count).text();
+				$("#sousuo").val(Tresult);
+				$("#greetings").hide();
+			})
+			$("body").click(function(){
+				$("#greetings").hide();
+			});
+		});
+	</script>
+
+	</body>
+</html>
